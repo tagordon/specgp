@@ -14,7 +14,8 @@ class Mean:
     all other means
     """
     
-    def __init__(self, **kwargs):
+    def __init__(self, nw=1, **kwargs):
+        self.nw = nw
         for k, v in kwargs.items():
             setattr(self, k, v)
     
@@ -31,44 +32,65 @@ class Mean:
         return MeanProd(m, self)
     
     def evaluate(self, x):
-        return np.zeros_like(x)
+        return np.zeros(len(x), nw)
     
 class ConstantMean(Mean):
     """A constant mean
     
     Args:
-        Float C: The constant value of the mean
+        Float C: The constant value of the mean or an 
+            array of values, one for each wavelength.
     """
     
     param_names = ("C")
     
-    def __init__(self, **kwargs):
+    def __init__(self, nw=1, **kwargs):
         
         validate_params(kwargs, self.param_names)
-        super(ConstantMean, self).__init__(**kwargs)
+        super(ConstantMean, self).__init__(nw, **kwargs)
+        
+        try:
+            self.C = np.full(nw, self.C)
+        except ValueError:
+            print("Length of C does not match number of wavelengths, nw. "
+                  "C should be either a float or an array of length nw.")
         
     def evaluate(self, x):
-        return self.C * np.ones_like(x)
+        return self.C[:, None] * np.ones_like(x)
     
 class LinearMean(Mean):
     
     """A mean function that increases linearly from A to B
     
     Args:
-        Float A: The initial value of the linear ramp
-        Float B: The final value of the linear ramp
+        Float A: The initial value of the linear ramp or an 
+            array of values, one for each wavelength
+        Float B: The final value of the linear ramp or an 
+            array of values, one for each wavelength
     """
     
     param_names = ("A", "B")
     
-    def __init__(self, **kwargs):
+    def __init__(self, nw=1, **kwargs):
         validate_params(kwargs, self.param_names)
-        super(LinearMean, self).__init__(**kwargs)
+        super(LinearMean, self).__init__(nw, **kwargs)
+        
+        try:
+            self.A = np.full(nw, self.A)
+            self.B = np.full(nw, self.B)
+        except ValueError:
+            print("Length of A or B does not match number of wavelengths, nw. "
+                  "A and B should be either floats or arrays of length nw.")
         
     def evaluate(self, x):
         rise = self.B - self.A
         run = x.max() - x.min()
         slope = rise / run
-        return self.A + (x - x.min())*slope
+        return self.A[:, None] + (x - x.min())*slope[:, None]
     
+class StarryPhaseCurve(Mean):
     
+    """The phase curve of a starry model
+    
+    """
+    pass
