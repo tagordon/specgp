@@ -1,6 +1,6 @@
 import numpy as np
-import exoplanet as xo
 import starry
+import theano.tensor as tt
 
 def validate_params(kwargs, param_names):
     if len(kwargs) > len(param_names):
@@ -19,21 +19,53 @@ class Mean:
         self.nw = nw
         for k, v in kwargs.items():
             setattr(self, k, v)
+            
+        self.param_names = self.get_param_names()
     
     def __add__(self, m):
-        return MeanSum(self, m)
+        if self.nw == m.nw:
+            return MeanSum(self, m)
+        else:
+            raise ValueError("Each mean must have the same number of wavelengths.")
     
     def __radd__(self, m):
-        return MeanSum(m, self)
-    
-    def __mul__(self, m):
-        return MeanProd(self, m)
-    
-    def __rmul__(self, m):
-        return MeanProd(m, self)
+        if self.nw == m.nw:
+            return MeanSum(m, self)
+        else:
+            raise ValueError("Each mean must have the same number of wavelengths.")
+            
+    def get_param_names(self):
+        return []
     
     def evaluate(self, x):
-        return np.zeros(len(x), self.nw)
+        return tt.zeros((len(x), self.nw))
+    
+class MeanSum(Mean):
+    
+    def __init__(self, *means, **kwargs):
+        self.means = means
+        super(MeanSum, self).__init__(means[0].nw, **kwargs)
+        
+    def __add__(self, m):
+        if self.nw == m.nw:
+            return MeanSum(*self.means, m)
+        else:
+            raise ValueError("Each mean must have the same number of wavelengths.")
+    
+    def __radd__(self, m):
+        if self.nw == m.nw:
+            return MeanSum(m, *self.means)
+        else:
+            raise ValueError("Each mean must have the same number of wavelengths.")
+            
+    def get_param_names(self):
+        param_names = []
+        for m in self.means:
+            param_names.extend(m.get_param_names())
+        return param_names
+    
+    def evaluate(self, x):
+        return tt.sum([m.evaluate(x) for m in self.means], axis=0)
     
 class ConstantMean(Mean):
     """A constant mean
@@ -42,12 +74,10 @@ class ConstantMean(Mean):
         Float C: The constant value of the mean or an 
             array of values, one for each wavelength.
     """
-    
-    param_names = ("C")
-    
+        
     def __init__(self, nw=1, **kwargs):
         
-        validate_params(kwargs, self.param_names)
+        validate_params(kwargs, self.get_param_names())
         super(ConstantMean, self).__init__(nw, **kwargs)
         
         try:
@@ -55,9 +85,12 @@ class ConstantMean(Mean):
         except ValueError:
             print("Length of C does not match number of wavelengths, nw. "
                   "C should be either a float or an array of length nw.")
+            
+    def get_param_names(self):
+        return ["C"]
         
     def evaluate(self, x):
-        return self.C[:, None] * np.ones_like(x)
+        return (self.C[:, None] * tt.ones_like(x)).T
     
 class LinearMean(Mean):
     
@@ -69,25 +102,26 @@ class LinearMean(Mean):
         Float B: The final value of the linear ramp or an 
             array of values, one for each wavelength
     """
-    
-    param_names = ("A", "B")
-    
+        
     def __init__(self, nw=1, **kwargs):
-        validate_params(kwargs, self.param_names)
+        validate_params(kwargs, self.get_param_names())
         super(LinearMean, self).__init__(nw, **kwargs)
         
         try:
-            self.A = np.full(nw, self.A)
-            self.B = np.full(nw, self.B)
+            self.A = tt.ones(nw).fill(self.A)
+            self.B = tt.ones(nw).fill(self.B)
         except ValueError:
             print("Length of A or B does not match number of wavelengths, nw. "
                   "A and B should be either floats or arrays of length nw.")
+            
+    def get_param_names(self):
+        return ["A", "B"]
         
     def evaluate(self, x):
         rise = self.B - self.A
         run = x.max() - x.min()
         slope = rise / run
-        return self.A[:, None] + (x - x.min())*slope[:, None]
+        return (self.A[:, None] + (x - x.min())*slope[:, None]).T
     
 class StarryPhaseCurve(Mean):
     
@@ -100,23 +134,24 @@ class StarryPhaseCurve(Mean):
         tensor Y: the spherical harmonic coefficients
         float Prot: the rotation period of the body
     """
-    
-    param_names = ("lmax", "Y", "Prot")
-    
+        
     def __init__(self, nw=1, **kwargs):
-        validate_params(kwargs, self.param_names)
+        validate_params(kwargs, self.get_param_names())
         super(StarryPhaseCurve, self).__init__(nw, **kwargs)
         
         self.starrymap = starry.Map(lmax=self.lmax, nwav=nw)
         try:
             for l in range(self.lmax):
                 for m in range(2*l+1):
-                    self.starrymap[l, m-l] = np.full(nw, self.Y[l][m])
+                    self.starrymap[l, m-l] = tt.ones(nw).fill(self.Y[l][m])
         except ValueError:
             print("Length of an entry in Y does not match the number of wavlengths, nw."
                  "All entries in Y should be either floats or arrays of length nw.")
         except IndexError:
             print("Invalid number of spherical harmonic coefficients.")
+            
+    def get_param_names(self):
+        return ["lmax", "Y", "Prot"]
             
     def evaluate(self, x):
         theta = ((x % self.Prot) / self.Prot) * 360
@@ -134,31 +169,37 @@ class StarryOccultationCurve(Mean):
         float delta: the duration of the occultation
         float b0: the impact parameter of the occulting body
         float t0: the time at the center of the occultation
-        float r0: the radius of the occulting body in units of the radius of the occulted body
+        float r0: the radius of the occulting body in 
+            units of the radius of the occulted body
     """
-    
-    param_names = ("lmax", "Y", "delta", "b0", "t0", "r0")
-    
+        
     def __init__(self, nw=1, **kwargs):
-        validate_params(kwargs, self.param_names)
+        validate_params(kwargs, self.get_param_names())
         super(StarryOccultationCurve, self).__init__(nw, **kwargs)
         
-        self.starrymap = starry.Map(lmax=self.lmax, nwav=nw)
+        self.starrymaps = [starry.Map(lmax=self.lmax) for i in range(nw)]
         try:
             for l in range(self.lmax):
                 for m in range(2*l+1):
-                    self.starrymap[l, m-l] = np.full(nw, self.Y[l][m])
+                    for i in range(nw):
+                        self.starrymaps[i][l, m-l] = self.Y[l][m][i]
         except ValueError:
             print("Length of an entry in Y does not match the number of wavlengths, nw."
                  "All entries in Y should be either floats or arrays of length nw.")
         except IndexError:
             print("Invalid number of spherical harmonic coefficients.")
             
+    def get_param_names(self):
+        return ["lmax", "Y", "delta", "b0", "t0", "r0"]
+            
     def evaluate(self, x):
         
-        xstart = (x.max() - x.min()) / self.delta
-        x0 = np.linspace(-xstart, xstart, len(x))
-        return self.starrymap.flux(xo=x0, yo=self.b0, ro=self.r0)
+        v = 2 / self.delta
+        xstart = - v * (self.t0 - x.min())
+        x0 = xstart + v * x
+        r0 = tt.ones(self.nw).fill(self.r0)
+        return tt.stack([self.starrymaps[i].flux(xo=x0, yo=self.b0, ro=r0[i]) 
+                for i in range(self.nw)]).T
     
 class StarryLDCurve(Mean):
     
@@ -172,23 +213,30 @@ class StarryLDCurve(Mean):
         float t0: the time at the center of the occultation
         float r0: the radius of the occulting body in units of the radius of the occulted body
     """
-    
-    param_names = ("u", "delta", "b0", "t0", "r0")
-    
+        
     def __init__(self, nw=1, **kwargs):
-        validate_params(kwargs, self.param_names)
+        validate_params(kwargs, self.get_param_names())
         super(StarryLDCurve, self).__init__(nw, **kwargs)
         
-        self.starrymap = starry.Map(nwav=nw)
+        self.starrymaps = [starry.Map(udeg=2) for i in range(nw)]
         
         try:
-            self.starrymap[1] = np.full(nw, self.u[0])
-            self.starrymap[2] = np.full(nw, self.u[1])
+            for i in range(nw):
+                self.starrymaps[i][1] = self.u[0][i]
+                self.starrymaps[i][2] = self.u[1][i]
         except ValueError:
             print("Length of an entry in u does not match the number of wavlengths, nw."
                  "All entries in u should be either floats or arrays of length nw.")
+            print(self.u)
+            
+    def get_param_names(self):
+        return ["u", "delta", "b0", "t0", "r0"]
         
     def evaluate(self, x):
-        xstart = (x.max() - x.min()) / self.delta
-        x0 = np.linspace(-xstart, xstart, len(x))
-        return self.starrymap.flux(xo=x0, yo=self.b0, ro=self.r0)
+        
+        v = 2 / self.delta
+        xstart = - v * (self.t0 - x.min())
+        x0 = xstart + v * x
+        r0 = tt.ones(self.nw).fill(self.r0)
+        return tt.stack([self.starrymaps[i].flux(xo=x0, yo=self.b0, ro=r0[i]) - 1 
+                for i in range(self.nw)]).T
