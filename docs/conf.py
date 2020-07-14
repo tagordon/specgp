@@ -15,6 +15,17 @@ import sys
 sys.path.insert(0, os.path.abspath('.'))
 sys.path.insert(0, os.path.abspath('..'))
 
+autodoc_mock_imports = [
+    "numpy",
+    "scipy",
+    "astropy",
+    "pymc3",
+    "theano",
+    "tqdm",
+    "rebound_pymc3",
+    "exoplanet"
+]
+
 # -- Project information -----------------------------------------------------
 
 project = 'SpecGP'
