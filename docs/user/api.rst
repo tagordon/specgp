@@ -9,5 +9,5 @@ API documentation
 .. autoclass:: SpecGP.distributions.MvUniform
    :inherited-members:
 
-.. autoclass SpecGP.means.KroneckerConstant
+.. autoclass:: SpecGP.means.KroneckerConstant
    :inherited-members:
