@@ -10,10 +10,10 @@ Welcome to SpecGP's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-.. automodule:: SpecGP.terms
+.. automodule:: terms
    :members:
 
-.. automodule:: SpecGP.distributions
+.. automodule:: distributions
    :members:
 
 Indices and tables
