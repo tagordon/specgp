@@ -42,7 +42,7 @@ runtime is a bit slower.
    :caption: Tutorials
 
    tutorials/getting-started
-   tutorials/SOHO
+   tutorials/soho.ipynb
 
 Indices and tables
 ==================
