@@ -45,7 +45,8 @@ release = '0.1'
 extensions = ['sphinx.ext.autodoc', 
     'sphinx.ext.coverage', 
     'sphinx.ext.napoleon',
-    'sphinx.ext.mathjax']
+    'sphinx.ext.mathjax',
+    'nbsphinx']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
