@@ -41,7 +41,7 @@ runtime is a bit slower.
    :maxdepth: 2
    :caption: Tutorials
 
-   tutorials/soho
+   tutorials/soho.ipynb
 
 Indices and tables
 ==================
