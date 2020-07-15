@@ -42,6 +42,7 @@ runtime is a bit slower.
    :caption: Tutorials
   
    tutorials/getting_started
+   tutorials/sum_of_terms
    tutorials/soho
 
 Indices and tables
