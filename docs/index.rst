@@ -40,7 +40,7 @@ runtime is a bit slower.
 .. toctree::
    :maxdepth: 2
    :caption: Tutorials
-
+  
    tutorials/getting_started
    tutorials/soho
 
