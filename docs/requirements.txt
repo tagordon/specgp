@@ -1,2 +1,8 @@
 ipykernel
 nbsphinx
+astropy
+numpy
+exoplanet
+matplotlib
+theano
+pymc3
