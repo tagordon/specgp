@@ -42,7 +42,6 @@ runtime is a bit slower.
    :caption: Tutorials
   
    tutorials/getting_started
-
    tutorials/sums_of_terms
    tutorials/soho
 
