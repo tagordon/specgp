@@ -1,16 +1,2 @@
 ipykernel
 nbsphinx
-astropy
-numpy
-exoplanet
-matplotlib
-theano
-pymc3
-sphinx>=1.7.5
-pandoc
-jupyter
-sphinx-typlog-theme
-nbformat
-nbconvert
-corner
-jupytext

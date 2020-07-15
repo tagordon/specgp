@@ -41,8 +41,7 @@ runtime is a bit slower.
    :maxdepth: 2
    :caption: Tutorials
 
-   tutorials/getting-started
-   tutorials/SOHO
+   tutorials/soho
 
 Indices and tables
 ==================
