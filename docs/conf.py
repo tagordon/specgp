@@ -29,7 +29,7 @@ autodoc_mock_imports = [
 
 # -- Project information -----------------------------------------------------
 
-project = 'SpecGP'
+project = 'specgp'
 copyright = '2020, Tyler Gordon'
 author = 'Tyler Gordon'
 
