@@ -1,13 +1,13 @@
 from setuptools import setup 
 
-setup(name='SpecGP', 
+setup(name='specgp', 
       version='0.1',
       description='Gaussian processes for multi-wavelength and spectral observations',
-      url='http://github.com/tagordon/SpecGP',
+      url='http://github.com/tagordon/specgp',
       author='Tyler Gordon',
       author_email='tagordon@uw.edu', 
       license='MIT',
-      packages=['SpecGP'],
+      packages=['specgp'],
       install_requires=['numpy',
                         'exoplanet',
                         'pymc3',
