@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API documentation &#8212; SpecGP 0.1 documentation</title>
+    <title>API documentation &#8212; specgp 0.1 documentation</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -18,8 +18,8 @@
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="../tutorials/soho.html" />
-    <link rel="prev" title="SpecGP" href="../index.html" />
+    <link rel="next" title="Getting started" href="../tutorials/getting_started.html" />
+    <link rel="prev" title="specgp" href="../index.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -39,8 +39,8 @@
   <div class="section" id="api-documentation">
 <span id="api"></span><h1>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="SpecGP.terms.KroneckerTerm">
-<em class="property">class </em><code class="sig-prename descclassname">SpecGP.terms.</code><code class="sig-name descname">KroneckerTerm</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span><a class="headerlink" href="#SpecGP.terms.KroneckerTerm" title="Permalink to this definition">¶</a></dt>
+<dt id="specgp.terms.KronTerm">
+<em class="property">class </em><code class="sig-prename descclassname">specgp.terms.</code><code class="sig-name descname">KronTerm</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span><a class="headerlink" href="#specgp.terms.KronTerm" title="Permalink to this definition">¶</a></dt>
 <dd><p>A Kronecker-structured covariance matrix
 of the form</p>
 <div class="math notranslate nohighlight">
@@ -54,16 +54,18 @@ either an outer product of the form</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>term</strong> (<em>Term</em>) – A celerite term.</p></li>
-<li><p><strong>alpha</strong> (<em>tensor</em>) – a vector or matrix. If alpha is a vector,
-the matrix <code class="docutils literal notranslate"><span class="pre">R</span></code> is defined as the outer product of
-alpha with itself. If alpha is a matrix, then <code class="docutils literal notranslate"><span class="pre">R</span></code>
-is taken to be equal to alpha.</p></li>
+<li><p><strong>alpha</strong><strong> or </strong><strong>tensor R</strong> (<em>tensor</em>) – a vector if alpha or matrix if R.
+If alpha is provided the matrix <code class="docutils literal notranslate"><span class="pre">R</span></code> is defined
+as the outer product of
+alpha with itself and the correlation between
+the GPs is a simple scaling relation with the
+scale factors given by the entries in alpha.</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
-<dt id="SpecGP.terms.KroneckerTerm.posdef">
-<code class="sig-name descname">posdef</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">diag</span></em><span class="sig-paren">)</span><a class="headerlink" href="#SpecGP.terms.KroneckerTerm.posdef" title="Permalink to this definition">¶</a></dt>
+<dt id="specgp.terms.KronTerm.posdef">
+<code class="sig-name descname">posdef</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">diag</span></em><span class="sig-paren">)</span><a class="headerlink" href="#specgp.terms.KronTerm.posdef" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check to determine postive definiteness of the Kronecker-structured
 covariance matrix. This operation is slow, and is thus not recommended
 to be called repeatedly as a check during optimization. Rather, the user
@@ -94,8 +96,8 @@ from the theano tensor variable.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="SpecGP.terms.KroneckerTerm.psd">
-<code class="sig-name descname">psd</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">omega</span></em><span class="sig-paren">)</span><a class="headerlink" href="#SpecGP.terms.KroneckerTerm.psd" title="Permalink to this definition">¶</a></dt>
+<dt id="specgp.terms.KronTerm.psd">
+<code class="sig-name descname">psd</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">omega</span></em><span class="sig-paren">)</span><a class="headerlink" href="#specgp.terms.KronTerm.psd" title="Permalink to this definition">¶</a></dt>
 <dd><p>The power spectrum of the Kronecker-structured kernel.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -116,8 +118,8 @@ with covariance described by <code class="docutils literal notranslate"><span cl
 </dd></dl>
 
 <dl class="py class">
-<dt id="SpecGP.distributions.MvUniform">
-<em class="property">class </em><code class="sig-prename descclassname">SpecGP.distributions.</code><code class="sig-name descname">MvUniform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">label</span></em>, <em class="sig-param"><span class="n">lower</span></em>, <em class="sig-param"><span class="n">upper</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#SpecGP.distributions.MvUniform" title="Permalink to this definition">¶</a></dt>
+<dt id="specgp.distributions.MvUniform">
+<em class="property">class </em><code class="sig-prename descclassname">specgp.distributions.</code><code class="sig-name descname">MvUniform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">label</span></em>, <em class="sig-param"><span class="n">lower</span></em>, <em class="sig-param"><span class="n">upper</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#specgp.distributions.MvUniform" title="Permalink to this definition">¶</a></dt>
 <dd><p>A multivariate uniform distribution.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -130,14 +132,14 @@ with covariance described by <code class="docutils literal notranslate"><span cl
 </dd></dl>
 
 <dl class="py class">
-<dt id="SpecGP.means.KroneckerConstant">
-<em class="property">class </em><code class="sig-prename descclassname">SpecGP.means.</code><code class="sig-name descname">KroneckerConstant</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">values</span></em><span class="sig-paren">)</span><a class="headerlink" href="#SpecGP.means.KroneckerConstant" title="Permalink to this definition">¶</a></dt>
+<dt id="specgp.means.KronMean">
+<em class="property">class </em><code class="sig-prename descclassname">specgp.means.</code><code class="sig-name descname">KronMean</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">values</span></em><span class="sig-paren">)</span><a class="headerlink" href="#specgp.means.KronMean" title="Permalink to this definition">¶</a></dt>
 <dd><p>A constant mean for use with Kronecker-structured
 kernels.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>values</strong> (<em>tensor</em>) – A vector containing the mean for each
-point in the second dimension.</p>
+correlated process.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -151,7 +153,7 @@ point in the second dimension.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../index.html">SpecGP</a></h1>
+<h1 class="logo"><a href="../index.html">specgp</a></h1>
 
 
 
@@ -165,13 +167,19 @@ point in the second dimension.</p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API documentation</a></li>
 </ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/sums_of_terms.html">Sums of Kronecker terms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/soho.html">Solar variability</a></li>
+</ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="../index.html" title="previous chapter">SpecGP</a></li>
-      <li>Next: <a href="../tutorials/soho.html" title="next chapter">&lt;no title&gt;</a></li>
+      <li>Previous: <a href="../index.html" title="previous chapter">specgp</a></li>
+      <li>Next: <a href="../tutorials/getting_started.html" title="next chapter">Getting started</a></li>
   </ul></li>
 </ul>
 </div>

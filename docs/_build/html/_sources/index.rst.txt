@@ -3,9 +3,9 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-SpecGP
+specgp
 ==================================
-*SpecGP* is an extension for *exoplanet* and 
+*spcgp* is an extension for *exoplanet* and 
 *celerite* that enables 2D Gaussian process 
 models. While there are a myriad of uses 
 for a 2D GP, one use of special relevance 
@@ -13,7 +13,7 @@ to exoplanet astronomy is to allow for simulteaneous
 modeling of stellar variability at multiple 
 wavelengths. 
 
-*SpecGP* provides a new *celerite* term, ``KroneckerTerm``, 
+*specgp* provides a new *celerite* term, ``KronTerm``, 
 which combines a 1D *celerite* term with a 
 second covariance matrix for the GP's 
 second dimension. In the case of multiwavelength 
@@ -23,11 +23,11 @@ with itself. In this case ``alpha`` is a vector
 of scale factors representing the relative amplitudes 
 of the variability in each wavelength. 
 
-*SpecGP* is fast and scalable, running in order 
+*specgp* is fast and scalable, running in order 
 N time for a grid of N points in the multiwavelength 
-case. As mentioned above, *SpecGP* can also deal 
-with arbitrary covariance matrices, for which the 
-runtime is a bit slower. 
+case. *specgp* also works with 
+arbitrary covariance matrices, but the 
+runtime is a bit slower in this case. 
 
 .. toctree::
    :maxdepth: 2
@@ -40,7 +40,9 @@ runtime is a bit slower.
 .. toctree::
    :maxdepth: 2
    :caption: Tutorials
-
+  
+   tutorials/getting_started
+   tutorials/sums_of_terms
    tutorials/soho
 
 Indices and tables

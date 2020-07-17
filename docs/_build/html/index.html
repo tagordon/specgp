@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SpecGP &#8212; SpecGP 0.1 documentation</title>
+    <title>specgp &#8212; specgp 0.1 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -36,15 +36,15 @@
           <div class="body" role="main">
             
   <div class="section" id="specgp">
-<h1>SpecGP<a class="headerlink" href="#specgp" title="Permalink to this headline">¶</a></h1>
-<p><em>SpecGP</em> is an extension for <em>exoplanet</em> and
+<h1>specgp<a class="headerlink" href="#specgp" title="Permalink to this headline">¶</a></h1>
+<p><em>spcgp</em> is an extension for <em>exoplanet</em> and
 <em>celerite</em> that enables 2D Gaussian process
 models. While there are a myriad of uses
 for a 2D GP, one use of special relevance
 to exoplanet astronomy is to allow for simulteaneous
 modeling of stellar variability at multiple
 wavelengths.</p>
-<p><em>SpecGP</em> provides a new <em>celerite</em> term, <code class="docutils literal notranslate"><span class="pre">KroneckerTerm</span></code>,
+<p><em>specgp</em> provides a new <em>celerite</em> term, <code class="docutils literal notranslate"><span class="pre">KronTerm</span></code>,
 which combines a 1D <em>celerite</em> term with a
 second covariance matrix for the GP’s
 second dimension. In the case of multiwavelength
@@ -53,11 +53,11 @@ outer product of a vector which we call <code class="docutils literal notranslat
 with itself. In this case <code class="docutils literal notranslate"><span class="pre">alpha</span></code> is a vector
 of scale factors representing the relative amplitudes
 of the variability in each wavelength.</p>
-<p><em>SpecGP</em> is fast and scalable, running in order
+<p><em>specgp</em> is fast and scalable, running in order
 N time for a grid of N points in the multiwavelength
-case. As mentioned above, <em>SpecGP</em> can also deal
-with arbitrary covariance matrices, for which the
-runtime is a bit slower.</p>
+case. <em>specgp</em> also works with
+arbitrary covariance matrices, but the
+runtime is a bit slower in this case.</p>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">User Guide</span></p>
 <ul>
@@ -67,7 +67,9 @@ runtime is a bit slower.</p>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Tutorials</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="tutorials/soho.html">Modeling Multiband SOHO Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/sums_of_terms.html">Sums of Kronecker terms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/soho.html">Solar variability</a></li>
 </ul>
 </div>
 </div>
@@ -87,7 +89,7 @@ runtime is a bit slower.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="#">SpecGP</a></h1>
+<h1 class="logo"><a href="#">specgp</a></h1>
 
 
 
@@ -103,7 +105,9 @@ runtime is a bit slower.</p>
 </ul>
 <p class="caption"><span class="caption-text">Tutorials</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="tutorials/soho.html">Modeling Multiband SOHO Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/sums_of_terms.html">Sums of Kronecker terms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/soho.html">Solar variability</a></li>
 </ul>
 
 <div class="relations">

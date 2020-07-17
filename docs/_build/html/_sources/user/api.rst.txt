@@ -3,11 +3,11 @@
 API documentation
 =================
 
-.. autoclass:: SpecGP.terms.KroneckerTerm
+.. autoclass:: specgp.terms.KronTerm
    :inherited-members:
 
-.. autoclass:: SpecGP.distributions.MvUniform
+.. autoclass:: specgp.distributions.MvUniform
    :inherited-members:
 
-.. autoclass:: SpecGP.means.KroneckerConstant
+.. autoclass:: specgp.means.KronMean
    :inherited-members:
