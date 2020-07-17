@@ -26,7 +26,7 @@ class KronTerm(Term):
         
         Args:
             Term term: A celerite term. 
-            tensor alpha or tensor R: a vector if alpha or matrix if R. 
+            tensor alpha or R: a vector if alpha or matrix if R. 
                 If alpha is provided the matrix ``R`` is defined 
                 as the outer product of 
                 alpha with itself and the correlation between 
@@ -112,9 +112,8 @@ class KronTerm(Term):
                tensor omega: A vector of frequencies.
                
             Returns:
-                psd: An array with each row representing the power spectrum 
-                    at one point in the second dimension (the dimension 
-                    with covariance described by ``R``). 
+                psd: A matrix with each row the power spectrum 
+                    for one of the correlated processes. 
         """
         
         ar, cr, ac, bc, cc, dc = self.term.coefficients

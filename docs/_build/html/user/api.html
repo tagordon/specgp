@@ -54,7 +54,7 @@ either an outer product of the form</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>term</strong> (<em>Term</em>) – A celerite term.</p></li>
-<li><p><strong>alpha</strong><strong> or </strong><strong>tensor R</strong> (<em>tensor</em>) – a vector if alpha or matrix if R.
+<li><p><strong>alpha</strong><strong> or </strong><strong>R</strong> (<em>tensor</em>) – a vector if alpha or matrix if R.
 If alpha is provided the matrix <code class="docutils literal notranslate"><span class="pre">R</span></code> is defined
 as the outer product of
 alpha with itself and the correlation between
@@ -104,8 +104,7 @@ from the theano tensor variable.</p>
 <dd class="field-odd"><p><strong>omega</strong> (<em>tensor</em>) – <p>A vector of frequencies.</p>
 <dl class="simple">
 <dt>Returns:</dt><dd><dl class="simple">
-<dt>psd: An array with each row representing the power spectrum</dt><dd><p>at one point in the second dimension (the dimension
-with covariance described by <code class="docutils literal notranslate"><span class="pre">R</span></code>).</p>
+<dt>psd: A matrix with each row the power spectrum</dt><dd><p>for one of the correlated processes.</p>
 </dd>
 </dl>
 </dd>
@@ -138,8 +137,8 @@ with covariance described by <code class="docutils literal notranslate"><span cl
 kernels.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>values</strong> (<em>tensor</em>) – A vector containing the mean for each
-correlated process.</p>
+<dd class="field-odd"><p><strong>values</strong> (<em>tensor</em>) – A matrix with each row containing
+the mean for each of the correlated processes.</p>
 </dd>
 </dl>
 </dd></dl>

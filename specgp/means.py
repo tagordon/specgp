@@ -8,8 +8,8 @@ class KronMean:
         kernels. 
         
         Args:
-            tensor values: A vector containing the mean for each 
-                correlated process.
+            tensor values: A matrix with each row containing 
+                the mean for each of the correlated processes. 
     """
     
     def __init__(self, values):
