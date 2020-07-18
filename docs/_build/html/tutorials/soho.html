@@ -417,8 +417,8 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="section" id="Solar-variability">
 <h1>Solar variability<a class="headerlink" href="#Solar-variability" title="Permalink to this headline">¶</a></h1>
-<p>In this tutorial we use a three-term Kronecker-structured covariance kernel to model multiband solar variability as observed by the SOHO spacecraft. We start off with some imports:</p>
-<p>We’re going to demonstrate specgp on data from the SOHO spacecraft’s three-channel sunphotometer. The data we use is available at <a class="reference external" href="https://sohowww.nascom.nasa.gov/data/archive.html">https://sohowww.nascom.nasa.gov/data/archive.html</a> as three separate fits files.</p>
+<p>In this tutorial we use a three-term Kronecker-structured covariance kernel to model multiband solar variability as observed by the SOHO spacecraft.</p>
+<p>We’ll be modeling data from the SOHO spacecraft’s three-channel sunphotometer. The data we use is available at <a class="reference external" href="https://sohowww.nascom.nasa.gov/data/archive.html">https://sohowww.nascom.nasa.gov/data/archive.html</a> as three separate fits files.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -546,7 +546,7 @@ Text(0.025, 0.4, &#39;power (ppm$^2$/Hz)&#39;)
 <p>We see a slight break in the slope of the spectrum right around <span class="math notranslate nohighlight">\(10^{-3}\)</span> Hz, possibly associated with the characteristic timescales of convective granulation on the Sun’s surface. The second term in our covariance kernel is meant to capture that feature.</p>
 <p>Lastly, we observe a peak in the power at <span class="math notranslate nohighlight">\(0.003-0.004\)</span> Hz possibly resulting from a superposition of asteroseismic modes. The third term in our covariance kernel is intended to model this feature.</p>
 <p>We use celerite’s builtin <code class="docutils literal notranslate"><span class="pre">SHOTerm</span></code> to capture the time-correlation for each term in our kernel. For the first two terms we hold the <code class="docutils literal notranslate"><span class="pre">log_Q</span></code> parameter constant at a value of <span class="math notranslate nohighlight">\(-\mathrm{log}(\sqrt{2})\)</span>, corresponding to a critically-damped oscillator. The third term we allow to vary in order to model the observed peak in the spectrum which results from coherent oscillations in the Sun’s brightness.</p>
-<p>This next cell is where we define and do inference on our model, so there’s a lot to explain. Go ahead and run the code first, and we’ll discuss the details afterwards. The last section of this cell runs the mcmc. It usually takes between 10 and 20 minutes on my computer, but feel free to comment that step out if you aren’t ready to wait that long right now.</p>
+<p>This next cell is where we define and do inference on our model, so there’s a lot to explain. Go ahead and run the code first, and we’ll discuss the details afterwards. The last section of this cell runs the mcmc. It usually takes less than 10 minutes on my computer but the runtime can vary by quite a lot.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>

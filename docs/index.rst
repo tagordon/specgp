@@ -6,7 +6,9 @@
 specgp
 ==================================
 *specgp* enables 2D Gaussian process 
-computations in *exoplanet*. It provides 
+computations in 
+`exoplanet <https://docs.exoplanet.codes/en/stable/>`_. 
+It provides 
 a GP kernel term, ``KronTerm(term, alpha or R)`` which 
 combines a 1D *celerite* kernel term with a 
 matrix specifying the covariance for the second 
@@ -30,6 +32,9 @@ models with arbitrary covariance in the second
 dimension which can be specified with a user-supplied 
 covariance matrix :math:`R`. In this case the runtime 
 scales as the cube of the size of the second dimension. 
+
+*specgp* is in active development on 
+`GitHub <https://github.com/tagordon/specgp>`_.
 
 .. toctree::
    :maxdepth: 2
