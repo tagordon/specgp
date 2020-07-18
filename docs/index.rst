@@ -23,7 +23,7 @@ each band and a vector, :math:`\alpha`, specifying
 a scaling relationship between the variability 
 amplitudes in each band. Models of this type 
 can be computed in :math:`\mathcal{O}(NM)` time 
-for :math:`N` observations taken in :math`M` bands. 
+for :math:`N` observations taken in :math:`M` bands. 
 
 *specgp* is also capable of computing 2D GP 
 models with arbitrary covariance in the second 
