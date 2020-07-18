@@ -1,8 +1,9 @@
-from exoplanet.gp.terms import Term
+import numpy as np
+import scipy
 import theano
 import theano.tensor as tt
-import numpy as np
-import scipy 
+
+from exoplanet.gp.terms import Term
 
 __all__ = ["KronTerm"]
 

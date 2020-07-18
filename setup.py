@@ -9,6 +9,7 @@ setup(name='specgp',
       license='MIT',
       packages=['specgp'],
       install_requires=['numpy',
+                        'scipy'
                         'exoplanet',
                         'pymc3',
                         'theano'],

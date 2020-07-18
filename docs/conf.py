@@ -22,8 +22,6 @@ autodoc_mock_imports = [
     "astropy",
     "pymc3",
     "theano",
-    "tqdm",
-    "rebound_pymc3",
     "exoplanet"
 ]
 
@@ -55,7 +53,6 @@ templates_path = ['_templates']
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
-
 
 # -- Options for HTML output -------------------------------------------------
 

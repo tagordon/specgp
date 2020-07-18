@@ -1,33 +1,35 @@
-.. SpecGP documentation master file, created by
+. SpecGP documentation master file, created by
    sphinx-quickstart on Mon Jul 13 21:52:36 2020.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
 specgp
 ==================================
-*spcgp* is an extension for *exoplanet* and 
-*celerite* that enables 2D Gaussian process 
-models. While there are a myriad of uses 
-for a 2D GP, one use of special relevance 
-to exoplanet astronomy is to allow for simulteaneous 
-modeling of stellar variability at multiple 
-wavelengths. 
+*specgp* enables 2D Gaussian process 
+computations in *exoplanet*. It provides 
+a GP kernel term, ``KronTerm(term, alpha or R)`` which 
+combines a 1D *celerite* kernel term with a 
+matrix specifying the covariance for the second 
+dimension. 
 
-*specgp* provides a new *celerite* term, ``KronTerm``, 
-which combines a 1D *celerite* term with a 
-second covariance matrix for the GP's 
-second dimension. In the case of multiwavelength 
-stellar variability, this second covariance is the 
-outer product of a vector which we call ``alpha`` 
-with itself. In this case ``alpha`` is a vector 
-of scale factors representing the relative amplitudes 
-of the variability in each wavelength. 
+While there are many uses for multidimensional 
+Gaussian processes, one of spetial relevance in 
+astronomy is simultaneously modeling variability 
+in multiband 
+light curves. Models of this type can 
+be specified in *specgp* by a 1D *celerite* term 
+to specify the common temporal covariance for 
+each band and a vector, :math:`\alpha`, specifying  
+a scaling relationship between the variability 
+amplitudes in each band. Models of this type 
+can be computed in :math:`\mathcal{O}(NM)` time 
+for :math:`N` observations taken in :math`M` bands. 
 
-*specgp* is fast and scalable, running in order 
-N time for a grid of N points in the multiwavelength 
-case. *specgp* also works with 
-arbitrary covariance matrices, but the 
-runtime is a bit slower in this case. 
+*specgp* is also capable of computing 2D GP 
+models with arbitrary covariance in the second 
+dimension which can be specified with a user-supplied 
+covariance matrix :math:`R`. In this case the runtime 
+scales as the cube of the size of the second dimension. 
 
 .. toctree::
    :maxdepth: 2

@@ -18,7 +18,7 @@
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="API documentation" href="user/api.html" />
+    <link rel="next" title="Installation" href="user/install.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -35,32 +35,42 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="specgp">
+  <dl class="simple">
+<dt>. SpecGP documentation master file, created by</dt><dd><p>sphinx-quickstart on Mon Jul 13 21:52:36 2020.
+You can adapt this file completely to your liking, but it should at least
+contain the root <cite>toctree</cite> directive.</p>
+</dd>
+</dl>
+<div class="section" id="specgp">
 <h1>specgp<a class="headerlink" href="#specgp" title="Permalink to this headline">¶</a></h1>
-<p><em>spcgp</em> is an extension for <em>exoplanet</em> and
-<em>celerite</em> that enables 2D Gaussian process
-models. While there are a myriad of uses
-for a 2D GP, one use of special relevance
-to exoplanet astronomy is to allow for simulteaneous
-modeling of stellar variability at multiple
-wavelengths.</p>
-<p><em>specgp</em> provides a new <em>celerite</em> term, <code class="docutils literal notranslate"><span class="pre">KronTerm</span></code>,
-which combines a 1D <em>celerite</em> term with a
-second covariance matrix for the GP’s
-second dimension. In the case of multiwavelength
-stellar variability, this second covariance is the
-outer product of a vector which we call <code class="docutils literal notranslate"><span class="pre">alpha</span></code>
-with itself. In this case <code class="docutils literal notranslate"><span class="pre">alpha</span></code> is a vector
-of scale factors representing the relative amplitudes
-of the variability in each wavelength.</p>
-<p><em>specgp</em> is fast and scalable, running in order
-N time for a grid of N points in the multiwavelength
-case. <em>specgp</em> also works with
-arbitrary covariance matrices, but the
-runtime is a bit slower in this case.</p>
+<p><em>specgp</em> enables 2D Gaussian process
+computations in <em>exoplanet</em>. It provides
+a GP kernel term, <code class="docutils literal notranslate"><span class="pre">KronTerm(term,</span> <span class="pre">alpha</span> <span class="pre">or</span> <span class="pre">R)</span></code> which
+combines a 1D <em>celerite</em> kernel term with a
+matrix specifying the covariance for the second
+dimension.</p>
+<p>While there are many uses for multidimensional
+Gaussian processes, one of spetial relevance in
+astronomy is simultaneously modeling variability
+in multiband
+light curves. Models of this type can
+be specified in <em>specgp</em> by a 1D <em>celerite</em> term
+to specify the common temporal covariance for
+each band and a vector, <span class="math notranslate nohighlight">\(\alpha\)</span>, specifying
+a scaling relationship between the variability
+amplitudes in each band. Models of this type
+can be computed in <span class="math notranslate nohighlight">\(\mathcal{O}(NM)\)</span> time
+for <span class="math notranslate nohighlight">\(N\)</span> observations taken in :math`M` bands.</p>
+<p><em>specgp</em> is also capable of computing 2D GP
+models with arbitrary covariance in the second
+dimension which can be specified with a user-supplied
+covariance matrix <span class="math notranslate nohighlight">\(R\)</span>. In this case the runtime
+scales as the cube of the size of the second dimension.</p>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">User Guide</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="user/install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user/citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user/api.html">API documentation</a></li>
 </ul>
 </div>
@@ -101,6 +111,8 @@ runtime is a bit slower in this case.</p>
 <h3>Navigation</h3>
 <p class="caption"><span class="caption-text">User Guide</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="user/install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user/citation.html">Citation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user/api.html">API documentation</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Tutorials</span></p>
@@ -114,7 +126,7 @@ runtime is a bit slower in this case.</p>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="#">Documentation overview</a><ul>
-      <li>Next: <a href="user/api.html" title="next chapter">API documentation</a></li>
+      <li>Next: <a href="user/install.html" title="next chapter">Installation</a></li>
   </ul></li>
 </ul>
 </div>
