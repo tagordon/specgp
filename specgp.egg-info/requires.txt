@@ -1,5 +1,0 @@
-numpy
-scipy
-exoplanet
-pymc3
-theano
