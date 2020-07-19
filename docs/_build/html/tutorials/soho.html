@@ -415,7 +415,12 @@ div.rendered_html tbody tr:hover {
     text-align: unset;
 }
 </style>
-<div class="section" id="Solar-variability">
+<style>
+    .nbinput .prompt,
+    .nboutput .prompt {
+    display: none;
+    }
+</style><div class="section" id="Solar-variability">
 <h1>Solar variability<a class="headerlink" href="#Solar-variability" title="Permalink to this headline">¶</a></h1>
 <p>In this tutorial we use a three-term Kronecker-structured covariance kernel to model multiband solar variability as observed by the SOHO spacecraft.</p>
 <p>We’ll be modeling data from the SOHO spacecraft’s three-channel sunphotometer. The data we use is available at <a class="reference external" href="https://sohowww.nascom.nasa.gov/data/archive.html">https://sohowww.nascom.nasa.gov/data/archive.html</a> as three separate fits files.</p>

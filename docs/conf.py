@@ -48,6 +48,16 @@ extensions = ['sphinx.ext.autodoc',
     'nbsphinx',
     'sphinx_rtd_theme']
 
+nbsphinx_prolog = """
+.. raw:: html
+
+    <style>
+        .nbinput .prompt,
+        .nboutput .prompt {
+        display: none;
+        }
+    </style>
+"""
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
