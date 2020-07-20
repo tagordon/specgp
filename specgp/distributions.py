@@ -18,6 +18,8 @@ class MvUniform(pm.distributions.Continuous):
         self.size = len(lower)
         self.lower = tt.as_tensor_variable(lower)
         self.upper = tt.as_tensor_variable(upper)
+        if not "testval" in kwargs:
+            kwargs["testval"] = tt.mean([self.upper, self.lower], axis=0)
         super(MvUniform, self).__init__(*args, shape=self.size, **kwargs)
         
     def random(self, point=None, size=None):
