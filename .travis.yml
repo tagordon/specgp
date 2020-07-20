@@ -9,5 +9,6 @@ python:
   
 install:
   - pip install -r .ci/requirements.txt
+  - pip install .
 
 script: pytest
