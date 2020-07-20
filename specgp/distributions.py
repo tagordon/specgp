@@ -4,7 +4,7 @@ import theano.tensor as tt
 
 __all__ = ["MvUniform"]
 
-def MvUniform(label, lower, upper, **kwargs):
+class MvUniform(pm.distributions.Continuous):
     """ A multivariate uniform distribution.
         
         Args:
@@ -13,9 +13,17 @@ def MvUniform(label, lower, upper, **kwargs):
     
     """
     
-    n = len(lower)
-    lower = tt.as_tensor_variable(lower)
-    upper = tt.as_tensor_variable(upper)
-    logp = lambda x: tt.switch(tt.all(x < upper) & tt.all(x > lower), 0, -np.inf)
-    random = lambda point=None, size=None: lower + np.random.rand(n)*(upper - lower)
-    return pm.DensityDist(label, logp, random=random, shape=n, **kwargs)
+    def __init__(self, lower, upper, *args, **kwargs):
+        
+        self.size = len(lower)
+        self.lower = tt.as_tensor_variable(lower)
+        self.upper = tt.as_tensor_variable(upper)
+        super(MvUniform, self).__init__(*args, shape=self.size, **kwargs)
+        
+    def random(self, point=None, size=None):
+        if size is None:
+            size = 1
+        return self.lower[None, :] + np.random.rand(size, self.size) * (self.upper - self.lower)[None, :]
+    
+    def logp(self, x):
+        return tt.switch(tt.all(x < self.upper) & tt.all(x > self.lower), 0, -np.inf)
