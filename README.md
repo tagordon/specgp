@@ -13,11 +13,14 @@
 <h2 align="center">
     installation
 </h2>
-<p align="center">
+<p>
     Installation is via pip:
     </br>
     <code>pip install specgp</code>
+</p>
 <h2 align="center">
     documentation
 </h2>
+<p>
     Documentation for <em>specgp</em> is available <a href="https://specgp.readthedocs.io">here</a>.
+</p>
