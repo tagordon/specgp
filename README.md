@@ -9,11 +9,11 @@
     <a href="https://arxiv.org/abs/2007.05799">
         <img src="https://img.shields.io/badge/arXiv-2007.05799-b31b1b.svg?style=flat"></a>
     </br>
-    <a href="https://github.com/exoplanet-dev/exoplanet"></a>
+    <a href="https://github.com/exoplanet-dev/exoplanet">
         <img src="https://img.shields.io/badge/powered_by-exoplanet-FE4365.svg?style=flat"></a>
-    <a href="https://github.com/dfm/celerite"></a>
+    <a href="https://github.com/dfm/celerite">
         <img src="https://img.shields.io/badge/powered_by-celerite-FE4365.svg?style=flat"></a>
-    <a href="https://github.com/pymc-devs/pymc3"></a>
+    <a href="https://github.com/pymc-devs/pymc3">
         <img src="https://img.shields.io/badge/powered_by-pymc3-FE4365.svg?style=flat"></a>
 </p>
 <p>
