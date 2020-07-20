@@ -13,4 +13,4 @@ def test_uniform():
     
 def test_uniform_in_model():
     with pm.Model() as model:
-        u = MvUniform("u", lower=[0, 0, 0], upper=[10, 10, 10]
+        u = MvUniform("u", lower=[0, 0, 0], upper=[10, 10, 10])
