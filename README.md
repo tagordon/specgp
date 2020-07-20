@@ -8,6 +8,8 @@
         <img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat"></a>
     <a href="https://arxiv.org/abs/2007.05799">
         <img src="https://img.shields.io/badge/arXiv-2007.05799-b31b1b.svg?style=flat"></a>
+    <a href="https://travis-ci.com/github/tagordon/specgp">
+        <img src="https://travis-ci.com/tagordon/specgp.svg?branch=master"></a>
     </br>
     <a href="https://github.com/exoplanet-dev/exoplanet">
         <img src="https://img.shields.io/badge/powered_by-exoplanet-FE4365.svg?style=flat"></a>
