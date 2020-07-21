@@ -89,6 +89,11 @@ diag = np.array([0.001, 0.1])
 diag = diag[:, None] * np.ones_like(t)
 ```
 
-<p><code>[[0.001 0.001 0.001 ... 0.001 0.001 0.001]
+<p>[[0.001 0.001 0.001 ... 0.001 0.001 0.001]
          [0.1   0.1   0.1   ... 0.1   0.1   0.1  ]]
-</code></p>
+</p>
+
+<p>
+    Here the first row represents the white noise variance 
+    at each time in the first band, and the second row represents 
+    the variance at each time in the second band.
