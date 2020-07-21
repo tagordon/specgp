@@ -170,6 +170,12 @@ class KronTerm(Term):
         return tt.switch(tt.any(tt.isnan(L)), np.array(False), np.array(True))
     
     def value(self, tau):
+        """
+            This is not yet implemented, meaning that 
+            computing the GP prediction for a 2D GP 
+            won't work. This will be implemented in an 
+            upcoming release. 
+        """
         raise NotImplementedError
     
 class KronTermSum(Term):
@@ -232,4 +238,10 @@ class KronTermSum(Term):
         return tt.switch(tt.any(tt.isnan(L)), np.array(False), np.array(True))
     
     def value(self, tau):
+        """
+            This is not yet implemented, meaning that 
+            computing the GP prediction for a 2D GP 
+            won't work. This will be implemented in an 
+            upcoming release. 
+        """
         raise NotImplementedError    
