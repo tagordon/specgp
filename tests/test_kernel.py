@@ -15,13 +15,15 @@ K = K + np.diag(np.concatenate(diag))
 def test_inverse():
     z = np.random.randn(len(t)*3, 1)
     y = np.dot(np.linalg.inv(K), z)
-    assert np.allclose(gp.apply_inverse(z).eval(), y)
+    y = tt.as_tensor_variable(y)
+    assert tt.allclose(y, gp.apply_inverse(z))
     
 def test_determinant():
     det = np.linalg.det(K)
-    assert np.allclose(np.log(det), gp.log_det.eval())
+    assert tt.allclose(tt.log(det), gp.log_det)
     
 def test_dot_l():
     z = np.random.randn(len(t)*3, 1)
     y = np.dot(np.linalg.cholesky(K), z)
-    assert np.allclose(gp.dot_l(z).eval(), y)
+    y = tt.as_tensor_variable(y)
+    assert tt.allclose(y, gp.dot_l(z))
