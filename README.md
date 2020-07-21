@@ -89,13 +89,15 @@ diag = np.array([0.001, 0.1])
 diag = diag[:, None] * np.ones_like(t)
 ```
 
-<p>[[0.001 0.001 0.001 ... 0.001 0.001 0.001]
-<br>
+```[[0.001 0.001 0.001 ... 0.001 0.001 0.001]
 [0.1   0.1   0.1   ... 0.1   0.1   0.1  ]]
-</p>
+```
 
 <p>
     Here the first row represents the white noise variance 
     at each time in the first band, and the second row represents 
-    the variance at each time in the second band.
+    the variance at each time in the second band. We also need 
+    to define a mean function for the GP. Here we define a 
+    flat mean for the GP as another 2D array of zeros
+    with the same structure as for the white noise:
 </p>
