@@ -89,7 +89,8 @@ diag = np.array([0.001, 0.1])
 diag = diag[:, None] * np.ones_like(t)
 ```
 
-```[[0.001 0.001 0.001 ... 0.001 0.001 0.001]
+```
+[[0.001 0.001 0.001 ... 0.001 0.001 0.001]
 [0.1   0.1   0.1   ... 0.1   0.1   0.1  ]]
 ```
 
@@ -100,4 +101,46 @@ diag = diag[:, None] * np.ones_like(t)
     to define a mean function for the GP. Here we define a 
     flat mean for the GP as another 2D array of zeros
     with the same structure as for the white noise:
+</p>
+
+```python
+mu = sgp.means.KronMean(np.zeros((2, len(t))))
+```
+
+<p>
+    Now we're ready to define the GP.
+</p>
+
+```python
+gp = xo.gp.GP(x=t, kernel=kernel, diag=diag, mean=mu, J=2)
+```
+
+<p>
+    Let's take a look at a sample from the GP:
+</p>
+
+```python
+n = np.random.randn(2*len(t), 1)
+y = gp.dot_l(n).eval()
+
+pl.plot(t, y[::2], '.', color='#FE4365')
+pl.plot(t, y[1::2], '.', color='#3F9778')
+pl.xlabel("time")
+pl.ylabel("y")
+```
+
+![sample](sample.png)
+
+<p>
+    Note that the ```dot_l``` function returns the 
+    sample as a 1D vector with the coordinates all 
+    mixed up. This happens because ```dot_l``` 
+    operates directly on the Cholesky decomposition 
+    of the Kronecker-structured covariance matrix. 
+    For most use cases the user won't need to worry 
+    about details like this, but it's pretty easy to 
+    disentangle the output if you need to. The element 
+    of the output corresponding to time ```i``` in band ```j``` 
+    is located at the element ```(M-1)*i + j``` where ```M``` 
+    is the number of bands.
 </p>
