@@ -2,6 +2,10 @@ import exoplanet as xo
 import specgp as sgp
 import numpy as np
 import theano.tensor as tt
+import theano 
+
+print("look_here: {}".format(theano.config.compute_test_value))
+theano.config.compute_test_value = 'off'
 
 term = xo.gp.terms.SHOTerm(log_S0=0.0, log_w0=0.0, log_Q=0.0)
 kernel = sgp.terms.KronTerm(term, alpha=[1, 2, 3])
