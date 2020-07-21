@@ -131,16 +131,14 @@ pl.ylabel("y")
 
 ![sample](sample.png)
 
-<p>
-    Note that the ```dot_l``` function returns the 
-    sample as a 1D vector with the coordinates all 
-    mixed up. This happens because ```dot_l``` 
-    operates directly on the Cholesky decomposition 
-    of the Kronecker-structured covariance matrix. 
-    For most use cases the user won't need to worry 
-    about details like this, but it's pretty easy to 
-    disentangle the output if you need to. The element 
-    of the output corresponding to time ```i``` in band ```j``` 
-    is located at the element ```(M-1)*i + j``` where ```M``` 
-    is the number of bands.
-</p>
+Note that the ```dot_l``` function returns the 
+sample as a 1D vector with the coordinates all 
+mixed up. This happens because ```dot_l``` 
+operates directly on the Cholesky decomposition 
+of the Kronecker-structured covariance matrix. 
+For most use cases the user won't need to worry 
+about details like this, but it's pretty easy to 
+disentangle the output if you need to. The element 
+of the output corresponding to time ```i``` in band ```j``` 
+is located at the element ```(M-1)*i + j``` where ```M``` 
+is the number of bands.
