@@ -24,7 +24,7 @@
     method     
 </p>
 
-<h2 align="center">
+<h2>
     installation
 </h2>
 <p>
@@ -32,13 +32,13 @@
     </br>
     <code>pip install specgp</code>
 </p>
-<h2 align="center">
+<h2>
     documentation
 </h2>
 <p>
     Documentation for <em>specgp</em> is available <a href="https://specgp.readthedocs.io">here</a>.
 </p>
-<h2 align="center">
+<h2>
     example
 </h2>
 <p>
@@ -52,11 +52,10 @@
     using a *celerite* term:
 
 </p>
-<p>
-    ```python
-    import numpy as np
-    import exoplanet as xo
+    
+```python
+import numpy as np
+import exoplanet as xo
 
-    term = xo.gp.terms.SHOTerm(log_S0=0.0, log_w0=1.0, log_Q=-np.log(np.sqrt(2)))
-    ```
-</p>
+term = xo.gp.terms.SHOTerm(log_S0=0.0, log_w0=1.0, log_Q=-np.log(np.sqrt(2)))
+```
