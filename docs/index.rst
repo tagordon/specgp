@@ -8,14 +8,12 @@ specgp
 *specgp* enables 2D Gaussian process 
 computations in 
 `exoplanet <https://docs.exoplanet.codes/en/stable/>`_. 
-It provides 
-a GP kernel term, ``KronTerm(term, alpha or R)`` which 
-combines a 1D *celerite* kernel term with a 
-matrix specifying the covariance for the second 
-dimension. 
+This is accomplished by a new kernel term which combines 
+a *celerite* term with a specification of the 
+covariance for the second dimension.
 
 While there are many uses for multidimensional 
-Gaussian processes, one of spetial relevance in 
+Gaussian processes, one of special relevance in 
 astronomy is simultaneously modeling variability 
 in multiband 
 light curves. Models of this type can 

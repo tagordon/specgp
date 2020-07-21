@@ -19,7 +19,9 @@
         <img src="https://img.shields.io/badge/powered_by-pymc3-FE4365.svg?style=flat"></a>
 </p>
 <p>
-    <em>specgp</em> enables 2D Gaussian process computations in <a href="https://github.com/exoplanet-dev/exoplanet.git"><em>exoplanet</em></a>. It provides a new kernel term which combines a <em>celerite</em> term with a second term for the other dimension. 
+    <em>specgp</em> enables 2D Gaussian process computations in <a href="https://github.com/exoplanet-dev/exoplanet.git"><em>exoplanet</em></a>. This is accomplished by a new kernel term which combines 
+    a <em>celerite</em> term with a specification of the covariance for the second dimension. The 
+    method     
 </p>
 
 <h2 align="center">
@@ -35,4 +37,25 @@
 </h2>
 <p>
     Documentation for <em>specgp</em> is available <a href="https://specgp.readthedocs.io">here</a>.
+</p>
+<h2 align="center">
+    example
+</h2>
+<p>
+    One straightforward application of *specgp* is modeling multiwavelength 
+    stellar variability. While the tutorials at 
+    <a href="https://specgp.readthedocs.io">specgp.readthedocs.io</a> cover 
+    the details of optimizing a GP model and running MCMC on this kind 
+    of data, here we present a simple demonstration of a multiwavelength 
+    variability model that illustrates the most basic usage of *specgp*:
+    
+    We start by defining the covariance in the time dimension 
+    using a *celerite* term:
+    
+    ```python
+    import numpy as np
+    import exoplanet as xo
+
+    term = xo.gp.terms.SHOTerm(log_S0=0.0, log_w0=1.0, log_Q=-np.log(np.sqrt(2)))
+    ```
 </p>
