@@ -59,3 +59,36 @@ import exoplanet as xo
 
 term = xo.gp.terms.SHOTerm(log_S0=0.0, log_w0=1.0, log_Q=-np.log(np.sqrt(2)))
 ```
+
+<p>
+    In the simplest case we can model the wavelength dependence of a star's 
+    variability as a simple scaling of the variability amplitude between bands 
+    (see <a href="https://arxiv.org/abs/2007.05799">our paper</a> for details). 
+    In this case we can construct the 2D kernel by passing the *celerite* term 
+    along with a vector of scale factors for the wavelength-dependence to 
+    the <code>KronTerm</code> constructor:
+</p>
+    
+```python
+import specgp as sgp
+
+# scaling factors for a two band model. The 
+# variability amplitude will scale by a factor 
+# of two between the two bands.
+alpha = [1, 2]
+kernel = sgp.terms.KronTerm(term, alpha=alpha)
+```
+<p>
+    Now we define the white noise component of the GP as 
+    a 2D array containing the white noise variance for 
+    each input coordinate:
+</p>
+
+```python
+diag = np.array([0.001, 0.1])
+diag = diag[:, None] * np.ones_like(t)
+```
+
+<p><code>[[0.001 0.001 0.001 ... 0.001 0.001 0.001]
+         [0.1   0.1   0.1   ... 0.1   0.1   0.1  ]]
+</code></p>
