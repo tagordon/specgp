@@ -169,6 +169,9 @@ class KronTerm(Term):
         L = chol(K + tt.diag(diag))
         return tt.switch(tt.any(tt.isnan(L)), np.array(False), np.array(True))
     
+    def value(self, tau):
+        raise NotImplementedError
+    
 class KronTermSum(Term):
     
     def __init__(self, *terms, **kwargs):
@@ -228,5 +231,5 @@ class KronTermSum(Term):
         L = chol(K + tt.diag(diag))
         return tt.switch(tt.any(tt.isnan(L)), np.array(False), np.array(True))
     
-                
-        
+    def value(self, tau):
+        raise NotImplementedError    
