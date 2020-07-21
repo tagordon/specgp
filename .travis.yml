@@ -11,4 +11,4 @@ install:
 env: 
   - THEANO_FLAGS=floatX=float64,compute_test_value=off
 
-script: nose2
+script: pytest
