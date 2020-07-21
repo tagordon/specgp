@@ -48,10 +48,11 @@
     the details of optimizing a GP model and running MCMC on this kind 
     of data, here we present a simple demonstration of a multiwavelength 
     variability model that illustrates the most basic usage of *specgp*:
-    
     We start by defining the covariance in the time dimension 
     using a *celerite* term:
-    
+
+</p>
+<p>
     ```python
     import numpy as np
     import exoplanet as xo
